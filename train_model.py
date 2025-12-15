@@ -1,24 +1,22 @@
+import streamlit as st
 import pandas as pd
-import pickle
-import os
+import numpy as np
+
 from sklearn.linear_model import LogisticRegression
 
-# Sample training data (for demo)
-data = pd.DataFrame({
-    "sessions": [1, 2, 3, 5, 8, 13, 21],
-    "pageviews": [5, 10, 15, 30, 50, 80, 130],
-    "timeOnSite": [50, 120, 300, 600, 1200, 2000, 3500],
-    "converted": [0, 0, 0, 1, 1, 1, 1]
-})
-
-X = data[["sessions", "pageviews", "timeOnSite"]]
-y = data["converted"]
-
+X_demo = np.array([[0,0],[0,1],[1,0],[1,1]])
+y_demo = np.array([0,0,0,1])
 model = LogisticRegression()
-model.fit(X, y)
+model.fit(X_demo, y_demo)
 
-os.makedirs("model", exist_ok=True)
-with open("model/conversion_model.pkl", "wb") as f:
-    pickle.dump(model, f)
 
-print("✅ Real ML model saved")
+st.title("User Conversion Prediction Demo")
+
+st.write("Enter features to predict conversion:")
+
+feature1 = st.number_input("Feature 1", value=0)
+feature2 = st.number_input("Feature 2", value=0)
+
+if st.button("Predict Conversion"):
+    prediction = model.predict([[feature1, feature2]])
+    st.success(f"Predicted Conversion: {prediction[0]}")
