@@ -1,3 +1,7 @@
+
+app link -https://huggingface.co/spaces/swarajaya/user-behavior-analytics
+
+
 📊 User Conversion Prediction Dashboard
 
 This project is a machine learning–powered web application that predicts whether a user will convert (e.g., make a purchase or sign up) based on website interaction data.
